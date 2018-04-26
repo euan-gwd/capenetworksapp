@@ -1,0 +1,20 @@
+.App {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "sidebar body";
+}
+
+.App-header {
+  grid-area: "header";
+  background-color: #222;
+  color: white;
+}
+
+.App-sidebar {
+  grid-area: "sidebar";
+}
+
+.App-body {
+  grid-area: "body";
+}
