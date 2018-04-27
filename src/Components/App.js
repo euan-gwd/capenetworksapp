@@ -6,6 +6,7 @@ import MapContainer from "./Content/MapContainer.js";
 import customerData from "../Data/FE Technical Test - data.json";
 
 export const ClientContext = React.createContext(null);
+export const ref = React.createRef();
 
 class App extends Component {
   state = { value: customerData };
