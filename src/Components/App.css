@@ -1,20 +1,49 @@
-.App {
+:root {
+  --bgColor: #444;
+  --headerColor: #1bcaff;
+  --borderColor: #00000025;
+  --listColor: #33333350;
+  --textColor: #fff;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+
+.App-Container {
+  font-family: "Open Sans", sans-serif;
+  font-weight: lighter;
+}
+
+.App-Wrapper {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  min-height: 100vh;
+}
+
+.App-Header {
+  background-color: var(--headerColor);
+  padding: 5px 0 0;
+  margin: 0;
+  color: var(--textColor);
+  text-align: center;
+  border-bottom: 1px solid var(--borderColor);
+}
+
+.App-Sidebar {
+  flex: 1;
+  order: 1;
+  margin: 0;
+  padding: 0;
+  background-color: var(--listColor);
+  color: var(--textColor);
+  border-right: 2px solid var(--borderColor);
   display: grid;
-  grid-template-areas:
-    "header header"
-    "sidebar body";
+  grid-template-rows: min-content 2fr 2fr;
 }
 
-.App-header {
-  grid-area: "header";
-  background-color: #222;
-  color: white;
-}
-
-.App-sidebar {
-  grid-area: "sidebar";
-}
-
-.App-body {
-  grid-area: "body";
+.App-Content {
+  flex: 3;
+  order: 2;
+  position: relative;
+  min-height: 100%;
 }

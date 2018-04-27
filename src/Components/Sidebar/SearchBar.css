@@ -1,0 +1,27 @@
+section {
+  border: 1px solid var(--borderColor);
+}
+
+.Label {
+}
+
+.searchForm {
+  height: 30px;
+  display: flex;
+}
+
+.searchForm input {
+  font-size: 1.4em;
+}
+
+.searchForm input[type="text"] {
+  flex: 1;
+  order: 1;
+}
+
+.searchForm input[type="submit"] {
+  flex: 1;
+  order: 2;
+  border: 1px solid #ddd;
+  background: #fff;
+}
