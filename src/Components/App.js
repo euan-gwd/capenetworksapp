@@ -3,8 +3,10 @@ import "./App.css";
 import SearchBar from "./Sidebar/SearchBar.js";
 import CustomersList from "./Sidebar/CustomersList.js";
 import MapContainer from "./Content/MapContainer.js";
+import customerData from "../Data/FE Technical Test - data.json";
 
 class App extends Component {
+  state = { customerData };
   render() {
     return (
       <div className="App-Container">
@@ -14,7 +16,7 @@ class App extends Component {
         <div className="App-Wrapper">
           <aside className="App-Sidebar">
             <SearchBar />
-            <CustomersList />
+            <CustomersList data={this.state.customerData} />
           </aside>
           <main className="App-Content">
             <MapContainer />
