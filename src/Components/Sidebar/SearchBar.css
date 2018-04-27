@@ -1,8 +1,5 @@
 section {
-  border: 1px solid var(--borderColor);
-}
-
-.Label {
+  padding: 0.5vh 0.5vw;
 }
 
 .searchForm {

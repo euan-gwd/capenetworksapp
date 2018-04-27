@@ -36,7 +36,7 @@
   padding: 0;
   background-color: var(--listColor);
   color: var(--textColor);
-  border-right: 2px solid var(--borderColor);
+  border-right: 1px solid var(--borderColor);
   display: grid;
   grid-template-rows: min-content 2fr 2fr;
 }
