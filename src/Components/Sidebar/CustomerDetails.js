@@ -1,12 +1,18 @@
 import React from "react";
 import "./CustomerStyles.css";
 
-const Customer = ({ details }) => {
+const Customer = ({ details, removeCustomer }) => {
   return (
-    <li>
+    <li className="customerListItem">
       <div className="customerName">
-        <span>{details.Firstname}</span>
-        <span>{details.Surname}</span>
+        <div>{details.Firstname}</div>
+        <div>{details.Surname}</div>
+        <button
+          className="listAction"
+          onClick={() => removeCustomer(details.Id)}
+        >
+          Remove
+        </button>
       </div>
     </li>
   );

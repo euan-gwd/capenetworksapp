@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <div className="App-Container">
         <header className="App-Header">
-          <h3>Cape Networks</h3>
+          <h3>Cape Networks Event</h3>
         </header>
         <div className="App-Wrapper">
           <aside className="App-Sidebar">
