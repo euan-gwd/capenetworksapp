@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import "./Selected.css";
+import "./Saved.css";
 
-class SelectedLocations extends Component {
+class SavedLocations extends Component {
   state = {};
   render() {
     return (
       <section>
-        <label className="Label">Selected Locations:</label>
+        <label className="Label">Saved Locations:</label>
         <div className="list">1. 2. 3.</div>
       </section>
     );
   }
 }
 
-export default SelectedLocations;
+export default SavedLocations;

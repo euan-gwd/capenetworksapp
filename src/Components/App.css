@@ -41,6 +41,14 @@
   grid-template-rows: min-content 2fr 2fr;
 }
 
+.App-Sidebar section {
+  padding: 0.5vh 0.5vw;
+}
+
+.App-Sidebar section .list {
+  border: 1px solid var(--borderColor);
+}
+
 .App-Content {
   flex: 3;
   order: 2;

@@ -5,7 +5,7 @@ class SearchBar extends Component {
   render() {
     return (
       <section>
-        <label className="Label">Search</label>
+        <label className="Label">Search:</label>
         <form className="searchForm" onSubmit={this.onSubmit}>
           <input
             placeholder="Enter a location"

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
 import MapContainer from "./MapContainer";
-import SearchBar from "./Sidebar/SearchBar";
+import SearchBar from "./Sidebar/SearchBar.js";
+import SelectedLocations from "./Sidebar/Selected.js";
+import SavedLocations from "./Sidebar/Saved.js";
 
 class App extends Component {
   render() {
@@ -13,12 +15,8 @@ class App extends Component {
         <div className="App-Wrapper">
           <aside className="App-Sidebar">
             <SearchBar />
-            <section className="selectLabel">
-              <label className="">Selected</label>
-            </section>
-            <section className="listLabel">
-              <label className="">Listings</label>
-            </section>
+            <SelectedLocations />
+            <SavedLocations />
           </aside>
           <main className="App-Content">
             <MapContainer />
