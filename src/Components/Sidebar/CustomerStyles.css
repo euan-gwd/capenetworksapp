@@ -1,0 +1,8 @@
+.customersWrapper {
+  flex: 2;
+  order: 2;
+}
+
+.customerName span:first-of-type {
+  margin-right: 10px;
+}
