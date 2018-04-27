@@ -5,7 +5,7 @@ class SelectedLocations extends Component {
   state = {};
   render() {
     return (
-      <section>
+      <section className="selectedWrapper">
         <label className="Label">Selected Locations:</label>
         <div className="list">1. 2. 3.</div>
       </section>

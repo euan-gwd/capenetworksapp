@@ -16,6 +16,7 @@
 .App-Wrapper {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   position: relative;
   min-height: 100vh;
 }
@@ -33,20 +34,24 @@
   flex: 1;
   order: 1;
   margin: 0;
-  padding: 0;
+  padding: 0.5vh 0.5vw;
   background-color: var(--listColor);
   color: var(--textColor);
   border-right: 1px solid var(--borderColor);
-  display: grid;
-  grid-template-rows: min-content 2fr 2fr;
+  display: flex;
+  flex-direction: column;
 }
 
-.App-Sidebar section {
-  padding: 0.5vh 0.5vw;
+.App-Sidebar section .Label {
+  font-style: italic;
+  color: #000;
 }
 
 .App-Sidebar section .list {
   border: 1px solid var(--borderColor);
+  padding-left: 0.25vw;
+  min-height: 30px;
+  font-size: 1.1rem;
 }
 
 .App-Content {
