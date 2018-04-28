@@ -4,15 +4,6 @@ import CustomerDetails from "./CustomerDetails";
 import "./CustomerStyles.css";
 
 class CustomersList extends Component {
-  // state = {};
-
-  // removeCustomer = key => {
-  //   const decreaseList = [...this.state.customers];
-  //   const index = decreaseList.findIndex(customer => customer.Id === key);
-  //   decreaseList.splice(index, 1);
-  //   this.setState({ customers: decreaseList });
-  // };
-
   render() {
     return (
       <section className="customersWrapper">
