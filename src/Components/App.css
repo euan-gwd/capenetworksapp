@@ -14,41 +14,35 @@
   font-weight: lighter;
 }
 
+.App-Header {
+  background-color: var(--headerColor);
+  margin: 0;
+  padding: 0;
+  color: var(--textColor);
+  border-bottom: 1px solid var(--borderColor);
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .App-Wrapper {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   position: relative;
+  margin-top: 0;
   min-height: 100vh;
 }
 
-@media only screen and (min-device-width: 480px) {
-  .App-Wrapper {
-    display: grid;
-    grid-template-columns: 3fr min-content;
-    grid-template-rows: 1fr;
-    position: relative;
-    min-height: 100vh;
-  }
-}
-
-.App-Header {
-  background-color: var(--headerColor);
-  padding: 5px 0 0;
-  margin: 0;
-  color: var(--textColor);
-  text-align: center;
-  border-bottom: 1px solid var(--borderColor);
-}
-
 .App-Content {
+  flex: 1;
   position: relative;
-  min-height: 100%;
+  min-height: 50vh;
 }
 
 .App-Sidebar {
   margin: 0;
-  padding: 0.5vh 0.5vw;
+  padding: 0;
   background-color: var(--listColor);
   color: var(--textColor);
   border: 1px solid var(--borderColor);
@@ -68,4 +62,43 @@
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+@media only screen and (min-device-width: 481px) {
+  .App-Wrapper {
+    display: grid;
+    grid-template-columns: 3fr max-content;
+    grid-template-rows: 1fr;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  .App-Content {
+    position: relative;
+    min-height: 100vh;
+  }
+
+  .App-Sidebar {
+    margin: 0;
+    padding: 0.5vh 0.5vw;
+    background-color: var(--listColor);
+    color: var(--textColor);
+    border: 1px solid var(--borderColor);
+  }
+
+  .App-Sidebar section .Label {
+    font-style: italic;
+    color: #000;
+  }
+
+  .App-Sidebar section .list {
+    border-top: 1px solid var(--borderColor);
+    border-bottom: 1px solid var(--borderColor);
+    min-height: 30px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 }

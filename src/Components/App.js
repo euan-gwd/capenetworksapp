@@ -44,7 +44,7 @@ class App extends Component {
               <MapContainer />
             </main>
             <aside className="App-Sidebar">
-              <SearchBar />
+              {/* <SearchBar /> */}
               <CustomersList />
             </aside>
           </div>
