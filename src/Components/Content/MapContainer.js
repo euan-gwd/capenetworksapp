@@ -7,7 +7,8 @@ export class MapContainer extends Component {
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
-    centerMap: { lat: -33.921829646, lng: 18.420998316 }
+    centerMap: { lat: -33.921829646, lng: 18.420998316 },
+    mapZoom: 10
   };
 
   onMarkerClick = (props, marker, e) => {
@@ -15,7 +16,8 @@ export class MapContainer extends Component {
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
-      centerMap: props.mapCenter
+      centerMap: props.position,
+      mapZoom: 12
     });
   };
 
@@ -24,7 +26,8 @@ export class MapContainer extends Component {
       this.setState({
         showingInfoWindow: false,
         activeMarker: null,
-        centerMap: { lat: -33.921829646, lng: 18.420998316 }
+        centerMap: { lat: -33.921829646, lng: 18.420998316 },
+        mapZoom: 10
       });
     }
   };
@@ -36,7 +39,7 @@ export class MapContainer extends Component {
           <Map
             google={this.props.google}
             className="map"
-            zoom={10}
+            zoom={this.state.mapZoom}
             style={{ height: "100%", position: "relative", width: "100%" }}
             initialCenter={{ lat: -33.921829646, lng: 18.420998316 }}
             center={this.state.centerMap}
