@@ -6,7 +6,7 @@ export class MapContainer extends Component {
   render() {
     return (
       <ClientContext.Consumer>
-        {customers => (
+        {context => (
           <Map
             google={this.props.google}
             className="map"
@@ -14,7 +14,7 @@ export class MapContainer extends Component {
             style={{ height: "100%", position: "relative", width: "100%" }}
             initialCenter={{ lat: -33.918861, lng: 18.4233 }}
           >
-            {customers.map(customer => (
+            {context.customers.map(customer => (
               <Marker
                 Name={customer.Surname}
                 position={{ lat: customer.Lat, lng: customer.Long }}

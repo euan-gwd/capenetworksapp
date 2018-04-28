@@ -4,27 +4,27 @@ import CustomerDetails from "./CustomerDetails";
 import "./CustomerStyles.css";
 
 class CustomersList extends Component {
-  state = {};
+  // state = {};
 
-  removeCustomer = key => {
-    const decreaseList = [...this.state.customers];
-    const index = decreaseList.findIndex(customer => customer.Id === key);
-    decreaseList.splice(index, 1);
-    this.setState({ customers: decreaseList });
-  };
+  // removeCustomer = key => {
+  //   const decreaseList = [...this.state.customers];
+  //   const index = decreaseList.findIndex(customer => customer.Id === key);
+  //   decreaseList.splice(index, 1);
+  //   this.setState({ customers: decreaseList });
+  // };
 
   render() {
     return (
       <section className="customersWrapper">
         <label className="Label">Customers:</label>
         <ClientContext.Consumer>
-          {customers => (
+          {context => (
             <ul className="list">
-              {customers.map(customer => (
+              {context.customers.map(customer => (
                 <CustomerDetails
                   key={customer.Id}
                   details={customer}
-                  removeCustomer={this.removeCustomer}
+                  removeCustomer={context.remove}
                 />
               ))}
             </ul>
