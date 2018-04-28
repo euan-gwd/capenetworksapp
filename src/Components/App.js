@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import SearchBar from "./Sidebar/SearchBar.js";
 import CustomersList from "./Sidebar/CustomersList.js";
 import MapContainer from "./Content/MapContainer.js";
 import customerData from "../Data/FE Technical Test - data.json";
@@ -44,7 +43,6 @@ class App extends Component {
               <MapContainer />
             </main>
             <aside className="App-Sidebar">
-              {/* <SearchBar /> */}
               <CustomersList />
             </aside>
           </div>
