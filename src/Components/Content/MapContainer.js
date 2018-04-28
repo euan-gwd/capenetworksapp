@@ -23,8 +23,6 @@ export class MapContainer extends Component {
   };
 
   onMapClicked = (props, map) => {
-    const { google } = props;
-
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
@@ -34,6 +32,7 @@ export class MapContainer extends Component {
       });
     }
 
+    const { google } = props;
     const venueSelect = new google.maps.Circle({
       strokeColor: "#FF0000",
       strokeOpacity: 0.8,
@@ -45,16 +44,13 @@ export class MapContainer extends Component {
       radius: 1000
     });
 
-    const AddCircle = () => {
-      venueSelect.setMap(map);
-      this.setState({ selectionActive: true });
-    };
-    const removeCircle = () => {
+    if (this.state.selectionActive) {
       venueSelect.setMap(null);
       this.setState({ selectionActive: false });
-    };
-
-    this.state.selectionActive === true ? removeCircle() : AddCircle();
+    } else {
+      venueSelect.setMap(map);
+      this.setState({ selectionActive: true });
+    }
   };
 
   render() {
