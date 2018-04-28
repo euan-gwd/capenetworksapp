@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./App.css";
 import SearchBar from "./Sidebar/SearchBar.js";
 import CustomersList from "./Sidebar/CustomersList.js";
 import MapContainer from "./Content/MapContainer.js";
 import customerData from "../Data/FE Technical Test - data.json";
+import "./App.css";
 
 export const ClientContext = React.createContext();
 
@@ -20,6 +20,18 @@ class App extends Component {
       this.setState({ customers: customerData });
     }
   };
+
+  componentDidMount = () => {
+    const sessionStorageRef = sessionStorage.getItem(`savedData`);
+    sessionStorageRef
+      ? this.setState({ customers: JSON.parse(sessionStorageRef) })
+      : this.setState({ customers: customerData });
+  };
+
+  componentDidUpdate = (prevProps, prevState) => {
+    sessionStorage.setItem(`savedData`, JSON.stringify(this.state.customers));
+  };
+
   render() {
     return (
       <div className="App-Container">
