@@ -15,11 +15,21 @@
 }
 
 .App-Wrapper {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
   position: relative;
   min-height: 100vh;
+}
+
+@media only screen and (min-device-width: 480px) {
+  .App-Wrapper {
+    display: grid;
+    grid-template-columns: 3fr min-content;
+    grid-template-rows: 1fr;
+    position: relative;
+    min-height: 100vh;
+  }
 }
 
 .App-Header {
@@ -31,16 +41,17 @@
   border-bottom: 1px solid var(--borderColor);
 }
 
+.App-Content {
+  position: relative;
+  min-height: 100%;
+}
+
 .App-Sidebar {
-  flex: 1;
-  order: 1;
   margin: 0;
   padding: 0.5vh 0.5vw;
   background-color: var(--listColor);
   color: var(--textColor);
-  border-right: 1px solid var(--borderColor);
-  display: flex;
-  flex-direction: column;
+  border: 1px solid var(--borderColor);
 }
 
 .App-Sidebar section .Label {
@@ -49,18 +60,12 @@
 }
 
 .App-Sidebar section .list {
-  border: 1px solid var(--borderColor);
+  border-top: 1px solid var(--borderColor);
+  border-bottom: 1px solid var(--borderColor);
   min-height: 30px;
   font-size: 1.1rem;
   text-decoration: none;
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.App-Content {
-  flex: 3;
-  order: 2;
-  position: relative;
-  min-height: 100%;
 }

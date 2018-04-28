@@ -2,11 +2,11 @@ import React from "react";
 import "./CustomerStyles.css";
 
 const Customer = ({ details, removeCustomer }) => {
+  const customerFullName = `${details.Firstname} ${details.Surname}`;
   return (
     <li className="customerListItem">
       <div className="customerName">
-        <div>{details.Firstname}</div>
-        <div>{details.Surname}</div>
+        <div>{customerFullName}</div>
         <button
           className="listAction"
           onClick={() => removeCustomer(details.Id)}

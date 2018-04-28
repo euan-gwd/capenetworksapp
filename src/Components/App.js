@@ -40,13 +40,13 @@ class App extends Component {
         </header>
         <ClientContext.Provider value={this.state}>
           <div className="App-Wrapper">
+            <main className="App-Content">
+              <MapContainer />
+            </main>
             <aside className="App-Sidebar">
               <SearchBar />
               <CustomersList />
             </aside>
-            <main className="App-Content">
-              <MapContainer />
-            </main>
           </div>
         </ClientContext.Provider>
       </div>

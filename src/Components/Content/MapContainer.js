@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { ClientContext } from "../App";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 
@@ -30,7 +30,8 @@ export class MapContainer extends Component {
             className="map"
             zoom={10}
             style={{ height: "100%", position: "relative", width: "100%" }}
-            initialCenter={{ lat: -33.918861, lng: 18.4233 }}
+            initialCenter={{ lat: -33.921829646, lng: 18.420998316 }}
+            center={{ lat: -33.921829646, lng: 18.420998316 }}
             onClick={this.onMapClicked}
           >
             {context.customers.map(customer => (
@@ -45,9 +46,9 @@ export class MapContainer extends Component {
               marker={this.state.activeMarker}
               visible={this.state.showingInfoWindow}
             >
-              <div>
-                <h1>{this.state.selectedPlace.name}</h1>
-              </div>
+              <Fragment>
+                <h4>{this.state.selectedPlace.name}</h4>
+              </Fragment>
             </InfoWindow>
           </Map>
         )}
