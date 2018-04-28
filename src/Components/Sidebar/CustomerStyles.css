@@ -17,14 +17,14 @@
   justify-content: space-between;
 }
 
-.customerName button {
+.listAction {
   border: none;
   cursor: pointer;
   background: transparent;
   color: var(--btnColor);
 }
 
-.customerName button:hover {
+.listAction:hover {
   color: var(--textColor);
   background-color: palevioletred;
 }

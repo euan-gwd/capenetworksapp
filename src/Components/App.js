@@ -15,6 +15,9 @@ class App extends Component {
       const index = decreaseList.findIndex(customer => customer.Id === key);
       decreaseList.splice(index, 1);
       this.setState({ customers: decreaseList });
+    },
+    reset: () => {
+      this.setState({ customers: customerData });
     }
   };
   render() {

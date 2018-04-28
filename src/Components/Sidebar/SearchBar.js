@@ -5,15 +5,15 @@ class SearchBar extends Component {
   render() {
     return (
       <section>
-        <label className="Label">Search:</label>
+        <label className="Label">Search Filter:</label>
         <form className="searchForm" onSubmit={this.onSubmit}>
           <input
-            placeholder="Enter a location"
+            placeholder="Enter a max distance"
             ref={ref => (this.autocomplete = ref)}
-            type="text"
+            type="number"
             className="left"
           />
-          <input type="submit" className="right" value="Go" />
+          <input type="submit" className="right" value="Filter" />
         </form>
       </section>
     );
