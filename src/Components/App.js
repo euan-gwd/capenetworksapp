@@ -24,7 +24,7 @@ class App extends Component {
     return (
       <div className="App-Container">
         <header className="App-Header">
-          <h3>Cape Networks Event</h3>
+          <h3>Cape Networks Event Planner</h3>
         </header>
         <ClientContext.Provider value={this.state}>
           <div className="App-Wrapper">
