@@ -4,9 +4,13 @@ import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 import userIcon from "../../Images/group.png";
 import "./MapContainer.css";
 
+let marker,
+  circle = null;
+
 export class MapContainer extends Component {
   state = {
     showingInfoWindow: false,
+    droppedPin: null,
     activeMarker: {},
     selectedPlace: {},
     centerMap: { lat: -33.921829646, lng: 18.420998316 },
@@ -22,15 +26,17 @@ export class MapContainer extends Component {
     });
   };
 
-  createMarker(latlng, google, map, maxDistance = 10) {
+  createMarker(latlng, google, map) {
     let marker = new google.maps.Marker({
       position: latlng,
-      map: map,
-      zIndex: Math.round(latlng.lat() * -100000) << 5
+      map: map
     });
 
-    console.log(maxDistance);
+    marker.setMap(map);
+    return marker;
+  }
 
+  createMarkerCircle(latlng, google, map, maxDistance) {
     let circle = new google.maps.Circle({
       strokeColor: "#FF0000",
       strokeOpacity: 0.8,
@@ -42,14 +48,13 @@ export class MapContainer extends Component {
       radius: maxDistance
     });
 
-    google.maps.event.trigger(marker, circle, "click");
-    return marker;
+    circle.setMap(map);
+    return circle;
   }
 
   onMapClicked = (props, map, clickEvent) => {
     const { google } = props;
     const { maxDistance } = this.props;
-    let marker = null;
 
     if (this.state.showingInfoWindow) {
       this.setState({
@@ -60,13 +65,23 @@ export class MapContainer extends Component {
       });
     }
 
-    //call function to create marker
-    if (marker) {
+    if (marker && marker !== null) {
       marker.setMap(null);
       marker = null;
     }
 
-    marker = this.createMarker(clickEvent.latLng, google, map, maxDistance);
+    if (circle && circle !== null) {
+      circle.setMap(null);
+      circle = null;
+    }
+
+    marker = this.createMarker(clickEvent.latLng, google, map);
+    circle = this.createMarkerCircle(
+      clickEvent.latLng,
+      google,
+      map,
+      maxDistance
+    );
   };
 
   render() {
