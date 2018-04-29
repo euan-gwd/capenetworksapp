@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from "react";
 import { ClientContext } from "../App";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
+import userIcon from "../../Images/customer.png";
+import "./MapContainer.css";
 
 export class MapContainer extends Component {
   state = {
     showingInfoWindow: false,
     activeMarker: {},
-    selectionActive: false,
     selectedPlace: {},
     centerMap: { lat: -33.921829646, lng: 18.420998316 },
     mapZoom: 10
@@ -17,12 +18,36 @@ export class MapContainer extends Component {
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
-      centerMap: props.position,
-      mapZoom: 11
+      centerMap: props.position
     });
   };
 
-  onMapClicked = (props, map) => {
+  createMarker(latlng, google, map) {
+    let marker = new google.maps.Marker({
+      position: latlng,
+      map: map
+      // zIndex: Math.round(latlng.lat() * -100000) << 5
+    });
+
+    let circle = new google.maps.Circle({
+      strokeColor: "#FF0000",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: "#FF0000",
+      fillOpacity: 0.05,
+      map: map,
+      center: latlng,
+      radius: 10 * 1000
+    });
+
+    google.maps.event.trigger(marker, circle, "click");
+    return marker;
+  }
+
+  onMapClicked = (props, map, clickEvent) => {
+    const { google } = props;
+    let marker = null;
+
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
@@ -32,25 +57,12 @@ export class MapContainer extends Component {
       });
     }
 
-    const { google } = props;
-    const venueSelect = new google.maps.Circle({
-      strokeColor: "#FF0000",
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: "#FF0000",
-      fillOpacity: 0.15,
-      map: map,
-      center: { lat: -33.921829646, lng: 18.420998316 },
-      radius: 1000
-    });
-
-    if (this.state.selectionActive) {
-      venueSelect.setMap(null);
-      this.setState({ selectionActive: false });
-    } else {
-      venueSelect.setMap(map);
-      this.setState({ selectionActive: true });
+    //call function to create marker
+    if (marker) {
+      marker.setMap(null);
+      marker = null;
     }
+    marker = this.createMarker(clickEvent.latLng, google, map);
   };
 
   render() {
@@ -69,12 +81,14 @@ export class MapContainer extends Component {
             {context.customers.map(customer => (
               <Marker
                 name={`${customer.Firstname} ${customer.Surname}`}
+                title={`${customer.Firstname} ${customer.Surname}`}
                 position={{
                   lat: customer.Lat,
                   lng: customer.Long
                 }}
                 key={customer.Id}
                 onClick={this.onMarkerClick}
+                icon={userIcon}
               />
             ))}
             <InfoWindow
@@ -82,7 +96,9 @@ export class MapContainer extends Component {
               visible={this.state.showingInfoWindow}
             >
               <Fragment>
-                <h4>{this.state.selectedPlace.name}</h4>
+                <h4 className="infoWindowText">
+                  {this.state.selectedPlace.name}
+                </h4>
               </Fragment>
             </InfoWindow>
           </Map>

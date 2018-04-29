@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CustomersList from "./Sidebar/CustomersList.js";
+import SearchFilter from "./Sidebar/SearchBar.js";
 import MapContainer from "./Content/MapContainer.js";
 import customerData from "../Data/FE Technical Test - data.json";
 import "./App.css";
@@ -17,7 +18,8 @@ class App extends Component {
     },
     reset: () => {
       this.setState({ customers: customerData });
-    }
+    },
+    maxDistance: 1000
   };
 
   componentDidMount = () => {
@@ -31,6 +33,11 @@ class App extends Component {
     sessionStorage.setItem(`savedData`, JSON.stringify(this.state.customers));
   };
 
+  maxDistanceFilter = item => {
+    const maxRadius = Number(item) * 1000;
+    this.setState({ maxDistance: maxRadius });
+  };
+
   render() {
     return (
       <div className="App-Container">
@@ -40,9 +47,10 @@ class App extends Component {
         <ClientContext.Provider value={this.state}>
           <div className="App-Wrapper">
             <main className="App-Content">
-              <MapContainer />
+              <MapContainer maxDistance={this.state.maxDistance} />
             </main>
             <aside className="App-Sidebar">
+              <SearchFilter maxDistanceFilter={this.maxDistanceFilter} />
               <CustomersList />
             </aside>
           </div>
