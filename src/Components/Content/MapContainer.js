@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { ClientContext } from "../App";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
-import customerIcon from "../../Images/home.png";
+import customerIcon from "../../Images/userLocation.png";
+// import customerIcon from "../../Images/shield.png";
 import partyIcon from "../../Images/party.png";
 import "./MapContainer.css";
 
@@ -21,8 +22,7 @@ export class MapContainer extends Component {
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
-      showingInfoWindow: true,
-      centerMap: props.position
+      showingInfoWindow: true
     });
   };
 
@@ -101,7 +101,8 @@ export class MapContainer extends Component {
             {context.customers.map(customer => (
               <Marker
                 name={`${customer.Firstname} ${customer.Surname}`}
-                label={customer.Id}
+                label={`${customer.Id}`}
+                // label={`${customer.Surname}`}
                 position={{
                   lat: customer.Lat,
                   lng: customer.Long
@@ -117,7 +118,6 @@ export class MapContainer extends Component {
             >
               <Fragment>
                 <h4 className="infoWindowText">
-                  <span>{this.state.selectedPlace.label}</span>{" "}
                   {this.state.selectedPlace.name}
                 </h4>
               </Fragment>
