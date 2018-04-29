@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { ClientContext } from "../App";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
-import customerIcon from "../../Images/house.png";
+import customerIcon from "../../Images/home.png";
 import partyIcon from "../../Images/party.png";
 import "./MapContainer.css";
 
@@ -107,6 +107,7 @@ export class MapContainer extends Component {
                   lng: customer.Long
                 }}
                 key={customer.Id}
+                icon={customerIcon}
                 onClick={this.onMarkerClick}
               />
             ))}
