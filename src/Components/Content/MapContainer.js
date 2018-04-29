@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { ClientContext } from "../App";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
-import userIcon from "../../Images/customer.png";
+import userIcon from "../../Images/group.png";
 import "./MapContainer.css";
 
 export class MapContainer extends Component {
@@ -22,12 +22,14 @@ export class MapContainer extends Component {
     });
   };
 
-  createMarker(latlng, google, map) {
+  createMarker(latlng, google, map, maxDistance = 10) {
     let marker = new google.maps.Marker({
       position: latlng,
-      map: map
-      // zIndex: Math.round(latlng.lat() * -100000) << 5
+      map: map,
+      zIndex: Math.round(latlng.lat() * -100000) << 5
     });
+
+    console.log(maxDistance);
 
     let circle = new google.maps.Circle({
       strokeColor: "#FF0000",
@@ -37,7 +39,7 @@ export class MapContainer extends Component {
       fillOpacity: 0.05,
       map: map,
       center: latlng,
-      radius: 10 * 1000
+      radius: maxDistance
     });
 
     google.maps.event.trigger(marker, circle, "click");
@@ -46,6 +48,7 @@ export class MapContainer extends Component {
 
   onMapClicked = (props, map, clickEvent) => {
     const { google } = props;
+    const { maxDistance } = this.props;
     let marker = null;
 
     if (this.state.showingInfoWindow) {
@@ -62,7 +65,8 @@ export class MapContainer extends Component {
       marker.setMap(null);
       marker = null;
     }
-    marker = this.createMarker(clickEvent.latLng, google, map);
+
+    marker = this.createMarker(clickEvent.latLng, google, map, maxDistance);
   };
 
   render() {

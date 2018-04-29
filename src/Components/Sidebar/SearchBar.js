@@ -10,7 +10,7 @@ class SearchFilter extends Component {
   render() {
     return (
       <section>
-        <label className="Label">Adjust Max Distance in Kms:</label>
+        <label className="Label">Adjust Distance in Kms:</label>
         <form className="searchForm" onSubmit={this.handleSubmit}>
           <input
             placeholder="Enter a number in km"
