@@ -19,7 +19,7 @@ class App extends Component {
     reset: () => {
       this.setState({ customers: customerData });
     },
-    maxDistance: 1000
+    maxDistance: 10000
   };
 
   componentDidMount = () => {

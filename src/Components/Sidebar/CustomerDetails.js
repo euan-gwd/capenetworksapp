@@ -6,7 +6,10 @@ const Customer = ({ details, removeCustomer }) => {
   return (
     <li className="customerListItem">
       <div className="customerName">
-        <div>{customerFullName}</div>
+        <div>
+          <span>{`${details.Id}. `}</span>
+          {customerFullName}
+        </div>
         <button
           className="listAction"
           onClick={() => removeCustomer(details.Id)}
