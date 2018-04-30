@@ -2,13 +2,12 @@ import React from "react";
 import "./CustomerStyles.css";
 
 const Customer = ({ details, removeCustomer }) => {
-  const customerFullName = `${details.Firstname} ${details.Surname}`;
   return (
     <li className="customerListItem">
       <div className="customerName">
         <div>
           <span>{`${details.Id}. `}</span>
-          {customerFullName}
+          {details.Fullname}
         </div>
         <button
           className="listAction"

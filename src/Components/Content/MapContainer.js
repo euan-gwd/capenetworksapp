@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import { ClientContext } from "../App";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 import customerIcon from "../../Images/userLocation.png";
-// import customerIcon from "../../Images/shield.png";
 import partyIcon from "../../Images/party.png";
 import "./MapContainer.css";
 
@@ -84,7 +83,15 @@ export class MapContainer extends Component {
       maxDistance
     );
 
-    console.log(this.context);
+    // const locations = customers.map(customer => {
+    //   const Fullname = `${customer.Firstname} ${customer.Surname}`;
+    //   const Id = `${customer.Id}`;
+    //   const Location = {
+    //     lat: customer.Lat,
+    //     lng: customer.Long
+    //   };
+    //   return { Id, Fullname, Location };
+    // });
   };
 
   render() {
@@ -102,13 +109,9 @@ export class MapContainer extends Component {
           >
             {context.customers.map(customer => (
               <Marker
-                name={`${customer.Firstname} ${customer.Surname}`}
+                name={`${customer.Fullname}`}
                 label={`${customer.Id}`}
-                // label={`${customer.Surname}`}
-                position={{
-                  lat: customer.Lat,
-                  lng: customer.Long
-                }}
+                position={customer.Location}
                 key={customer.Id}
                 icon={customerIcon}
                 onClick={this.onMarkerClick}

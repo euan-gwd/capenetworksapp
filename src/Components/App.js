@@ -7,6 +7,16 @@ import "./App.css";
 
 export const ClientContext = React.createContext();
 
+const customersList = customerData.map(customer => {
+  const Fullname = `${customer.Firstname} ${customer.Surname}`;
+  const Id = `${customer.Id}`;
+  const Location = {
+    lat: customer.Lat,
+    lng: customer.Long
+  };
+  return { Id, Fullname, Location };
+});
+
 class App extends Component {
   state = {
     customers: customerData,
@@ -17,7 +27,7 @@ class App extends Component {
       this.setState({ customers: decreaseList });
     },
     reset: () => {
-      this.setState({ customers: customerData });
+      this.setState({ customers: customersList });
     },
     maxDistance: 5000
   };
@@ -26,7 +36,7 @@ class App extends Component {
     const sessionStorageRef = sessionStorage.getItem(`savedData`);
     sessionStorageRef
       ? this.setState({ customers: JSON.parse(sessionStorageRef) })
-      : this.setState({ customers: customerData });
+      : this.setState({ customers: customersList });
   };
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -47,7 +57,10 @@ class App extends Component {
         <ClientContext.Provider value={this.state}>
           <div className="App-Wrapper">
             <main className="App-Content">
-              <MapContainer maxDistance={this.state.maxDistance} />
+              <MapContainer
+                maxDistance={this.state.maxDistance}
+                customers={this.state.customers}
+              />
             </main>
             <aside className="App-Sidebar">
               <SearchFilter maxDistanceFilter={this.maxDistanceFilter} />
