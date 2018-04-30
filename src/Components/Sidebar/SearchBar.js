@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./SearchBar.css";
+import "./SearchBarStyles.css";
 
 class SearchFilter extends Component {
   handleSubmit = event => {

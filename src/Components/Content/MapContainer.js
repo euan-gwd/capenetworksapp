@@ -3,7 +3,7 @@ import { ClientContext } from "../App";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 import customerIcon from "../../Images/userLocation.png";
 import partyIcon from "../../Images/party.png";
-import "./MapContainer.css";
+import "./MapContainerStyles.css";
 
 let marker = null;
 let circle = null;
