@@ -5,8 +5,8 @@ import customerIcon from "../../Images/userLocation.png";
 import partyIcon from "../../Images/party.png";
 import "./MapContainer.css";
 
-// let marker,
-//   circle = null;
+let marker = null;
+let circle = null;
 
 export class MapContainer extends Component {
   state = {
@@ -25,58 +25,36 @@ export class MapContainer extends Component {
     });
   };
 
-  // createMarker(latlng, google, map) {
-  //   let marker = new google.maps.Marker({
-  //     position: latlng,
-  //     map: map,
-  //     icon: partyIcon
-  //   });
-
-  //   marker.setMap(map);
-  //   return marker;
-  // }
-
-  // createMarkerCircle(latlng, google, map, maxDistance) {
-  //   let circle = new google.maps.Circle({
-  //     strokeColor: "#FF0000",
-  //     strokeOpacity: 0.8,
-  //     strokeWeight: 2,
-  //     fillColor: "#FF0000",
-  //     fillOpacity: 0.05,
-  //     map: map,
-  //     center: latlng,
-  //     radius: maxDistance
-  //   });
-
-  //   circle.setMap(map);
-  //   return circle;
-  // }
-
-  customerFilterTools = (props, map) => {
-    const { google, maxDistance } = props;
-
-    // Initialize the drawing manager.
-    let drawingManager = new google.maps.drawing.DrawingManager({
-      drawingMode: google.maps.drawing.OverlayType.CIRCLE,
-      drawingControl: true,
-      drawingControlOptions: {
-        position: google.maps.ControlPosition.TOP_CENTER,
-        drawingModes: [google.maps.drawing.OverlayType.CIRCLE]
-      }
+  createMarker(latlng, google, map) {
+    let marker = new google.maps.Marker({
+      position: latlng,
+      map: map,
+      icon: partyIcon
     });
 
-    // if (drawingManager.map) {
-    //   drawingManager.setMap(null);
-    //   // In case the user drew anything, get rid of the circle
-    //   if (circle !== null) {
-    //     circle.setMap(null);
-    //   }
-    // } else {
-    drawingManager.setMap(map);
-    // }
-  };
+    marker.setMap(map);
+    return marker;
+  }
+
+  createMarkerCircle(latlng, google, map, maxDistance) {
+    let circle = new google.maps.Circle({
+      strokeColor: "#FF0000",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: "#FF0000",
+      fillOpacity: 0.025,
+      map: map,
+      center: latlng,
+      radius: maxDistance
+    });
+
+    circle.setMap(map);
+    return circle;
+  }
 
   onMapClicked = (props, map, clickEvent) => {
+    const { google, maxDistance } = props;
+
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
@@ -86,33 +64,23 @@ export class MapContainer extends Component {
       });
     }
 
-    // if (marker && marker !== null) {
-    //   marker.setMap(null);
-    //   marker = null;
-    // }
+    if (marker && marker !== null) {
+      marker.setMap(null);
+      marker = null;
+    }
 
-    // if (circle && circle !== null) {
-    //   circle.setMap(null);
-    //   circle = null;
-    // }
+    if (circle && circle !== null) {
+      circle.setMap(null);
+      circle = null;
+    }
 
-    // marker = this.createMarker(clickEvent.latLng, google, map);
-    // circle = this.createMarkerCircle(
-    //   clickEvent.latLng,
-    //   google,
-    //   map,
-    //   maxDistance
-    // );
-
-    // const locations = customers.map(customer => {
-    //   const Fullname = `${customer.Firstname} ${customer.Surname}`;
-    //   const Id = `${customer.Id}`;
-    //   const Location = {
-    //     lat: customer.Lat,
-    //     lng: customer.Long
-    //   };
-    //   return { Id, Fullname, Location };
-    // });
+    marker = this.createMarker(clickEvent.latLng, google, map);
+    circle = this.createMarkerCircle(
+      clickEvent.latLng,
+      google,
+      map,
+      maxDistance
+    );
   };
 
   render() {
