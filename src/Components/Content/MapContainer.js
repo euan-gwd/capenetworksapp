@@ -5,8 +5,8 @@ import customerIcon from "../../Images/userLocation.png";
 import partyIcon from "../../Images/party.png";
 import "./MapContainer.css";
 
-let marker,
-  circle = null;
+// let marker,
+//   circle = null;
 
 export class MapContainer extends Component {
   state = {
@@ -25,37 +25,58 @@ export class MapContainer extends Component {
     });
   };
 
-  createMarker(latlng, google, map) {
-    let marker = new google.maps.Marker({
-      position: latlng,
-      map: map,
-      icon: partyIcon
+  // createMarker(latlng, google, map) {
+  //   let marker = new google.maps.Marker({
+  //     position: latlng,
+  //     map: map,
+  //     icon: partyIcon
+  //   });
+
+  //   marker.setMap(map);
+  //   return marker;
+  // }
+
+  // createMarkerCircle(latlng, google, map, maxDistance) {
+  //   let circle = new google.maps.Circle({
+  //     strokeColor: "#FF0000",
+  //     strokeOpacity: 0.8,
+  //     strokeWeight: 2,
+  //     fillColor: "#FF0000",
+  //     fillOpacity: 0.05,
+  //     map: map,
+  //     center: latlng,
+  //     radius: maxDistance
+  //   });
+
+  //   circle.setMap(map);
+  //   return circle;
+  // }
+
+  customerFilterTools = (props, map) => {
+    const { google, maxDistance } = props;
+
+    // Initialize the drawing manager.
+    let drawingManager = new google.maps.drawing.DrawingManager({
+      drawingMode: google.maps.drawing.OverlayType.CIRCLE,
+      drawingControl: true,
+      drawingControlOptions: {
+        position: google.maps.ControlPosition.TOP_CENTER,
+        drawingModes: [google.maps.drawing.OverlayType.CIRCLE]
+      }
     });
 
-    marker.setMap(map);
-    return marker;
-  }
-
-  createMarkerCircle(latlng, google, map, maxDistance) {
-    let circle = new google.maps.Circle({
-      strokeColor: "#FF0000",
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: "#FF0000",
-      fillOpacity: 0.05,
-      map: map,
-      center: latlng,
-      radius: maxDistance
-    });
-
-    circle.setMap(map);
-    return circle;
-  }
+    // if (drawingManager.map) {
+    //   drawingManager.setMap(null);
+    //   // In case the user drew anything, get rid of the circle
+    //   if (circle !== null) {
+    //     circle.setMap(null);
+    //   }
+    // } else {
+    drawingManager.setMap(map);
+    // }
+  };
 
   onMapClicked = (props, map, clickEvent) => {
-    const { google } = props;
-    const { maxDistance } = this.props;
-
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
@@ -65,23 +86,23 @@ export class MapContainer extends Component {
       });
     }
 
-    if (marker && marker !== null) {
-      marker.setMap(null);
-      marker = null;
-    }
+    // if (marker && marker !== null) {
+    //   marker.setMap(null);
+    //   marker = null;
+    // }
 
-    if (circle && circle !== null) {
-      circle.setMap(null);
-      circle = null;
-    }
+    // if (circle && circle !== null) {
+    //   circle.setMap(null);
+    //   circle = null;
+    // }
 
-    marker = this.createMarker(clickEvent.latLng, google, map);
-    circle = this.createMarkerCircle(
-      clickEvent.latLng,
-      google,
-      map,
-      maxDistance
-    );
+    // marker = this.createMarker(clickEvent.latLng, google, map);
+    // circle = this.createMarkerCircle(
+    //   clickEvent.latLng,
+    //   google,
+    //   map,
+    //   maxDistance
+    // );
 
     // const locations = customers.map(customer => {
     //   const Fullname = `${customer.Firstname} ${customer.Surname}`;
@@ -106,6 +127,8 @@ export class MapContainer extends Component {
             initialCenter={{ lat: -33.921829646, lng: 18.420998316 }}
             center={this.state.centerMap}
             onClick={this.onMapClicked}
+            onReady={this.customerFilterTools}
+            maxDistance={context.maxDistance}
           >
             {context.customers.map(customer => (
               <Marker
@@ -135,5 +158,6 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyChqqtvBFFuqXASpde2yUR69FmcKmPK5uY"
+  apiKey: "AIzaSyChqqtvBFFuqXASpde2yUR69FmcKmPK5uY",
+  libraries: ["geometry", "drawing"]
 })(MapContainer);
