@@ -83,6 +83,8 @@ export class MapContainer extends Component {
       map,
       maxDistance
     );
+
+    console.log(this.context);
   };
 
   render() {
