@@ -2,24 +2,14 @@ import React, { Component } from "react";
 import CustomersList from "./Sidebar/CustomersList.js";
 import SearchFilter from "./Sidebar/SearchBar.js";
 import MapContainer from "./Content/MapContainer.js";
-import customerData from "../Data/FE Technical Test - data.json";
+import customerDB from "../Data/FE Technical Test - data.json";
 import "./App.css";
 
 export const ClientContext = React.createContext();
 
-const customersList = customerData.map(customer => {
-  const Fullname = `${customer.Firstname} ${customer.Surname}`;
-  const Id = `${customer.Id}`;
-  const Location = {
-    lat: customer.Lat,
-    lng: customer.Long
-  };
-  return { Id, Fullname, Location };
-});
-
 class App extends Component {
   state = {
-    customers: customerData,
+    customers: customerDB,
     remove: key => {
       const decreaseList = [...this.state.customers];
       const index = decreaseList.findIndex(customer => customer.Id === key);
@@ -27,7 +17,7 @@ class App extends Component {
       this.setState({ customers: decreaseList });
     },
     reset: () => {
-      this.setState({ customers: customersList });
+      this.setState({ customers: customerDB });
     },
     maxDistance: 5000
   };
@@ -36,7 +26,7 @@ class App extends Component {
     const sessionStorageRef = sessionStorage.getItem(`savedData`);
     sessionStorageRef
       ? this.setState({ customers: JSON.parse(sessionStorageRef) })
-      : this.setState({ customers: customersList });
+      : this.setState({ customers: customerDB });
   };
 
   componentDidUpdate = (prevProps, prevState) => {

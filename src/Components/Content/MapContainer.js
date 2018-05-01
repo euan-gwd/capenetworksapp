@@ -133,9 +133,9 @@ export class MapContainer extends Component {
           >
             {context.customers.map(customer => (
               <Marker
-                name={`${customer.Fullname}`}
+                name={`${customer.Firstname} ${customer.Surname}`}
                 label={`${customer.Id}`}
-                position={customer.Location}
+                position={{ lat: customer.Lat, lng: customer.Long }}
                 key={customer.Id}
                 icon={customerIcon}
                 onClick={this.onMarkerClick}

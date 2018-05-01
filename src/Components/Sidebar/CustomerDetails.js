@@ -7,7 +7,7 @@ const Customer = ({ details, removeCustomer }) => {
       <div className="customerName">
         <div>
           <span>{`${details.Id}. `}</span>
-          {details.Fullname}
+          {`${details.Firstname} ${details.Surname}`}
         </div>
         <button
           className="listAction"
