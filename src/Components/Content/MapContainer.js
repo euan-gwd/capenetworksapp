@@ -18,6 +18,7 @@ export class MapContainer extends Component {
   };
 
   onMarkerClick = (props, marker, e) => {
+    this.resetSearch();
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
@@ -34,6 +35,18 @@ export class MapContainer extends Component {
 
     centerMarker.setMap(map);
     return centerMarker;
+  }
+
+  resetSearch() {
+    if (searchMarker && searchMarker !== null) {
+      searchMarker.setMap(null);
+      searchMarker = null;
+    }
+
+    if (searchCircle && searchCircle !== null) {
+      searchCircle.setMap(null);
+      searchCircle = null;
+    }
   }
 
   createSearchCircle(latlng, google, map, maxDistance) {
@@ -64,15 +77,7 @@ export class MapContainer extends Component {
       });
     }
 
-    if (searchMarker && searchMarker !== null) {
-      searchMarker.setMap(null);
-      searchMarker = null;
-    }
-
-    if (searchCircle && searchCircle !== null) {
-      searchCircle.setMap(null);
-      searchCircle = null;
-    }
+    this.resetSearch();
 
     searchMarker = this.createSearchMarker(clickEvent.latLng, google, map);
     searchCircle = this.createSearchCircle(
