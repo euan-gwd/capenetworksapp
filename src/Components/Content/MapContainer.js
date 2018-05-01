@@ -5,8 +5,8 @@ import customerIcon from "../../Images/userLocation.png";
 import partyIcon from "../../Images/party.png";
 import "./MapContainerStyles.css";
 
-let marker = null;
-let circle = null;
+let searchMarker = null;
+let searchCircle = null;
 
 export class MapContainer extends Component {
   state = {
@@ -25,19 +25,19 @@ export class MapContainer extends Component {
     });
   };
 
-  createMarker(latlng, google, map) {
-    let marker = new google.maps.Marker({
+  createSearchMarker(latlng, google, map) {
+    let centerMarker = new google.maps.Marker({
       position: latlng,
       map: map,
       icon: partyIcon
     });
 
-    marker.setMap(map);
-    return marker;
+    centerMarker.setMap(map);
+    return centerMarker;
   }
 
-  createMarkerCircle(latlng, google, map, maxDistance) {
-    let circle = new google.maps.Circle({
+  createSearchCircle(latlng, google, map, maxDistance) {
+    let circleSearch = new google.maps.Circle({
       strokeColor: "#FF0000",
       strokeOpacity: 0.8,
       strokeWeight: 2,
@@ -48,8 +48,8 @@ export class MapContainer extends Component {
       radius: maxDistance
     });
 
-    circle.setMap(map);
-    return circle;
+    circleSearch.setMap(map);
+    return circleSearch;
   }
 
   onMapClicked = (props, map, clickEvent) => {
@@ -64,18 +64,18 @@ export class MapContainer extends Component {
       });
     }
 
-    if (marker && marker !== null) {
-      marker.setMap(null);
-      marker = null;
+    if (searchMarker && searchMarker !== null) {
+      searchMarker.setMap(null);
+      searchMarker = null;
     }
 
-    if (circle && circle !== null) {
-      circle.setMap(null);
-      circle = null;
+    if (searchCircle && searchCircle !== null) {
+      searchCircle.setMap(null);
+      searchCircle = null;
     }
 
-    marker = this.createMarker(clickEvent.latLng, google, map);
-    circle = this.createMarkerCircle(
+    searchMarker = this.createSearchMarker(clickEvent.latLng, google, map);
+    searchCircle = this.createSearchCircle(
       clickEvent.latLng,
       google,
       map,
