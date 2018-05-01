@@ -11,7 +11,7 @@ class SearchFilter extends Component {
   render() {
     return (
       <section>
-        <label className="Label">Set max distance radius:</label>
+        <label className="Label">Set new max search distance:</label>
         <form className="searchForm" onSubmit={this.handleSubmit}>
           <input
             placeholder="Enter a number in km"
