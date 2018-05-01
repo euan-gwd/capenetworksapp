@@ -97,7 +97,13 @@ export class MapContainer extends Component {
         searchResults.push(marker);
       }
     });
-    getSearchResult(searchResults);
+    if (searchResults.length !== 0) {
+      getSearchResult(searchResults);
+    } else {
+      alert("No Markers found within Search Area");
+      this.resetSearchCircle();
+      this.props.reset();
+    }
   };
 
   render() {

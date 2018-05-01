@@ -75,6 +75,7 @@ class App extends Component {
               <MapContainer
                 maxDistance={this.state.maxDistance}
                 getSearchResult={this.getSearchResult}
+                reset={this.state.reset}
               />
             </main>
             <aside className="App-Sidebar">
