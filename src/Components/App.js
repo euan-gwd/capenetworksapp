@@ -57,10 +57,7 @@ class App extends Component {
         <ClientContext.Provider value={this.state}>
           <div className="App-Wrapper">
             <main className="App-Content">
-              <MapContainer
-                maxDistance={this.state.maxDistance}
-                customers={this.state.customers}
-              />
+              <MapContainer maxDistance={this.state.maxDistance} />
             </main>
             <aside className="App-Sidebar">
               <SearchFilter maxDistanceFilter={this.maxDistanceFilter} />

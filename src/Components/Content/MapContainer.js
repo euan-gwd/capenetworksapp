@@ -81,6 +81,35 @@ export class MapContainer extends Component {
       map,
       maxDistance
     );
+
+    let [customerLocations] = props.children;
+    let markers = [];
+
+    for (let i = 0; i < customerLocations.length; i++) {
+      const Fullname = customerLocations[i].props.name;
+      const Location = new google.maps.LatLng(
+        customerLocations[i].props.position.lat,
+        customerLocations[i].props.position.lng
+      );
+      const Id = Number(customerLocations[i].props.label);
+      const marker = { Id, Fullname, Location };
+      markers.push(marker);
+    }
+
+    let searchResults = [];
+
+    markers.forEach(marker => {
+      if (
+        google.maps.geometry.spherical.computeDistanceBetween(
+          marker.Location,
+          clickEvent.latLng
+        ) <= maxDistance
+      ) {
+        searchResults.push(marker);
+      }
+    });
+
+    console.log(searchResults);
   };
 
   render() {
@@ -95,7 +124,6 @@ export class MapContainer extends Component {
             initialCenter={{ lat: -33.921829646, lng: 18.420998316 }}
             center={this.state.centerMap}
             onClick={this.onMapClicked}
-            onReady={this.customerFilterTools}
             maxDistance={context.maxDistance}
           >
             {context.customers.map(customer => (
