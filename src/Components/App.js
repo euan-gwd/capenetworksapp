@@ -10,6 +10,7 @@ export const ClientContext = React.createContext();
 class App extends Component {
   state = {
     customers: customerDB,
+    maxDistance: 5000,
     remove: key => {
       const decreaseList = [...this.state.customers];
       const index = decreaseList.findIndex(customer => customer.Id === key);
@@ -18,8 +19,7 @@ class App extends Component {
     },
     reset: () => {
       this.setState({ customers: customerDB });
-    },
-    maxDistance: 5000
+    }
   };
 
   componentDidMount = () => {
@@ -33,9 +33,28 @@ class App extends Component {
     sessionStorage.setItem(`savedData`, JSON.stringify(this.state.customers));
   };
 
-  maxDistanceFilter = item => {
-    const maxRadius = Number(item) * 1000;
+  getMaxDistance = result => {
+    const maxRadius = Number(result) * 1000;
     this.setState({ maxDistance: maxRadius });
+  };
+
+  getSearchResult = results => {
+    const filteredCustomerList = results.map(result => {
+      const nameArr = result.Fullname.split(" ");
+      const [Firstname, Surname] = nameArr;
+      const Id = result.Id;
+      const Lat = result.latLng.lat();
+      const Long = result.latLng.lng();
+      const searchResults = {
+        Id,
+        Firstname,
+        Surname,
+        Lat,
+        Long
+      };
+      return searchResults;
+    });
+    this.setState({ customers: filteredCustomerList });
   };
 
   render() {
@@ -47,10 +66,13 @@ class App extends Component {
         <ClientContext.Provider value={this.state}>
           <div className="App-Wrapper">
             <main className="App-Content">
-              <MapContainer maxDistance={this.state.maxDistance} />
+              <MapContainer
+                maxDistance={this.state.maxDistance}
+                getSearchResult={this.getSearchResult}
+              />
             </main>
             <aside className="App-Sidebar">
-              <SearchFilter maxDistanceFilter={this.maxDistanceFilter} />
+              <SearchFilter getMaxDistance={this.getMaxDistance} />
               <CustomersList />
             </aside>
           </div>

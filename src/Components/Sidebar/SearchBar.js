@@ -4,7 +4,7 @@ import "./SearchBarStyles.css";
 class SearchFilter extends Component {
   handleSubmit = event => {
     event.preventDefault();
-    this.props.maxDistanceFilter(this.input.value);
+    this.props.getMaxDistance(this.input.value);
   };
 
   render() {

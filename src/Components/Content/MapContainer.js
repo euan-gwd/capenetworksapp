@@ -30,7 +30,8 @@ export class MapContainer extends Component {
     let centerMarker = new google.maps.Marker({
       position: latlng,
       map: map,
-      icon: partyIcon
+      icon: partyIcon,
+      zIndex: 5
     });
 
     centerMarker.setMap(map);
@@ -65,8 +66,24 @@ export class MapContainer extends Component {
     return circleSearch;
   }
 
+  getMarkersFromMap(customerLocations, google) {
+    let markers = [];
+    for (let i = 0; i < customerLocations.length; i++) {
+      const Fullname = customerLocations[i].props.name;
+      const latLng = new google.maps.LatLng(
+        customerLocations[i].props.position.lat,
+        customerLocations[i].props.position.lng
+      );
+      const Id = Number(customerLocations[i].props.label);
+      const marker = { Id, Fullname, latLng };
+      markers.push(marker);
+    }
+    return markers;
+  }
+
   onMapClicked = (props, map, clickEvent) => {
     const { google, maxDistance } = props;
+    const { getSearchResult } = this.props;
 
     if (this.state.showingInfoWindow) {
       this.setState({
@@ -87,45 +104,31 @@ export class MapContainer extends Component {
       maxDistance
     );
 
-    let [customerLocations] = props.children;
-    let markers = [];
-
-    for (let i = 0; i < customerLocations.length; i++) {
-      const Fullname = customerLocations[i].props.name;
-      const Location = new google.maps.LatLng(
-        customerLocations[i].props.position.lat,
-        customerLocations[i].props.position.lng
-      );
-      const Id = Number(customerLocations[i].props.label);
-      const marker = { Id, Fullname, Location };
-      markers.push(marker);
-    }
-
+    const [customerLocations] = props.children;
+    const markers = this.getMarkersFromMap(customerLocations, google);
     let searchResults = [];
 
     markers.forEach(marker => {
       if (
         google.maps.geometry.spherical.computeDistanceBetween(
-          marker.Location,
+          marker.latLng,
           clickEvent.latLng
         ) <= maxDistance
       ) {
         searchResults.push(marker);
       }
     });
-
-    console.log(searchResults);
+    getSearchResult(searchResults);
   };
 
   render() {
     return (
-      <ClientContext.Consumer>
+      <ClientContext.Consumer className="container">
         {context => (
           <Map
             google={this.props.google}
-            className="map"
             zoom={this.state.mapZoom}
-            style={{ height: "100%", position: "relative", width: "100%" }}
+            className="map"
             initialCenter={{ lat: -33.921829646, lng: 18.420998316 }}
             center={this.state.centerMap}
             onClick={this.onMapClicked}
