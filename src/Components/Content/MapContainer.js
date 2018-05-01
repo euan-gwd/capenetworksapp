@@ -97,10 +97,7 @@ export class MapContainer extends Component {
         searchResults.push(marker);
       }
     });
-
-    if (searchResults !== [] || null) {
-      getSearchResult(searchResults);
-    }
+    getSearchResult(searchResults);
   };
 
   render() {

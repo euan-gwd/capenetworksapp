@@ -11,6 +11,7 @@ class App extends Component {
   state = {
     customers: customerDB,
     maxDistance: 5000,
+    circle: null,
     remove: key => {
       const decreaseList = [...this.state.customers];
       const index = decreaseList.findIndex(customer => customer.Id === key);
@@ -54,7 +55,12 @@ class App extends Component {
       };
       return searchResults;
     });
-    this.setState({ customers: filteredCustomerList });
+
+    if (results.length !== 0) {
+      this.setState({ customers: filteredCustomerList });
+    } else {
+      this.setState({ customers: customerDB });
+    }
   };
 
   render() {
