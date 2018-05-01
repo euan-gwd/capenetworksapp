@@ -2,10 +2,8 @@ import React, { Component, Fragment } from "react";
 import { ClientContext } from "../App";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 import customerIcon from "../../Images/userLocation.png";
-import partyIcon from "../../Images/party.png";
 import "./MapContainerStyles.css";
 
-let searchMarker = null;
 let searchCircle = null;
 
 export class MapContainer extends Component {
@@ -26,24 +24,7 @@ export class MapContainer extends Component {
     });
   };
 
-  createSearchMarker(latlng, google, map) {
-    let centerMarker = new google.maps.Marker({
-      position: latlng,
-      map: map,
-      icon: partyIcon,
-      zIndex: 5
-    });
-
-    centerMarker.setMap(map);
-    return centerMarker;
-  }
-
-  resetSearch() {
-    if (searchMarker && searchMarker !== null) {
-      searchMarker.setMap(null);
-      searchMarker = null;
-    }
-
+  resetSearchCircle() {
     if (searchCircle && searchCircle !== null) {
       searchCircle.setMap(null);
       searchCircle = null;
@@ -93,10 +74,8 @@ export class MapContainer extends Component {
         mapZoom: 10
       });
     }
+    this.resetSearchCircle();
 
-    this.resetSearch();
-
-    searchMarker = this.createSearchMarker(clickEvent.latLng, google, map);
     searchCircle = this.createSearchCircle(
       clickEvent.latLng,
       google,
@@ -118,7 +97,10 @@ export class MapContainer extends Component {
         searchResults.push(marker);
       }
     });
-    getSearchResult(searchResults);
+
+    if (searchResults !== [] || null) {
+      getSearchResult(searchResults);
+    }
   };
 
   render() {
