@@ -1,8 +1,8 @@
-#Code Test For Cape Networks
+# Code Test For Cape Networks
 
 Event Planner v.1.0
 
-##Instructions:
+## Instructions:
 
 run `npm install` to install all depenancies locally
 then run `npm start` to start local server.
