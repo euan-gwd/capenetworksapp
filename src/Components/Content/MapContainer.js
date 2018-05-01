@@ -4,6 +4,7 @@ import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 import customerIcon from "../../Images/userLocation.png";
 import "./MapContainerStyles.css";
 
+let searchMarker = null;
 let searchCircle = null;
 
 export class MapContainer extends Component {
@@ -25,10 +26,24 @@ export class MapContainer extends Component {
   };
 
   resetSearchCircle() {
+    if (searchMarker && searchMarker !== null) {
+      searchMarker.setMap(null);
+      searchMarker = null;
+    }
     if (searchCircle && searchCircle !== null) {
       searchCircle.setMap(null);
       searchCircle = null;
     }
+  }
+
+  createSearchMarker(latlng, google, map) {
+    let centerMarker = new google.maps.Marker({
+      position: latlng,
+      map: map
+    });
+
+    centerMarker.setMap(map);
+    return centerMarker;
   }
 
   createSearchCircle(latlng, google, map, maxDistance) {
@@ -75,7 +90,7 @@ export class MapContainer extends Component {
       });
     }
     this.resetSearchCircle();
-
+    searchMarker = this.createSearchMarker(clickEvent.latLng, google, map);
     searchCircle = this.createSearchCircle(
       clickEvent.latLng,
       google,
