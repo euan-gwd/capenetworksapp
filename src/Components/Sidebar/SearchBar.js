@@ -5,6 +5,7 @@ class SearchFilter extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.props.getMaxDistance(this.input.value);
+    this.input.value = null;
   };
 
   render() {
@@ -18,7 +19,7 @@ class SearchFilter extends Component {
             ref={input => (this.input = input)}
             className="left"
           />
-          <input type="submit" className="right" value="Set" />
+          <input type="submit" className="right" value="Confirm" />
         </form>
       </section>
     );

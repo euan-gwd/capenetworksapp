@@ -16,7 +16,7 @@ export class MapContainer extends Component {
   };
 
   onMarkerClick = (props, marker, e) => {
-    this.resetSearch();
+    this.resetSearchCircle();
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
