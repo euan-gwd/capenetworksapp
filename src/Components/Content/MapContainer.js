@@ -97,6 +97,7 @@ export class MapContainer extends Component {
         searchResults.push(marker);
       }
     });
+
     if (searchResults.length !== 0) {
       getSearchResult(searchResults);
     } else {
